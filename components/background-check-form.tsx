@@ -10,19 +10,18 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { PlusCircle, Trash2 } from "lucide-react"
-import { DatePicker } from "@/components/date-picker"
 import { SignaturePad } from "@/components/signature-pad"
 
 export function BackgroundCheckForm() {
   const router = useRouter()
   const [personalInfo, setPersonalInfo] = useState({
     client: "",
-    requestDate: undefined as Date | undefined,
-    returnDate: undefined as Date | undefined,
+    requestDate: "",
+    returnDate: "",
     address: "",
     reference: "",
     candidate: "",
-    dob: undefined as Date | undefined,
+    dob: "",
     idType: "",
   })
   const [candidateRecords, setCandidateRecords] = useState([{ address: "", phone: "" }])
@@ -30,8 +29,8 @@ export function BackgroundCheckForm() {
     {
       institution: "",
       program: "",
-      startDate: undefined as Date | undefined,
-      endDate: undefined as Date | undefined,
+      startDate: "",
+      endDate: "",
       status: "",
     },
   ])
@@ -39,8 +38,8 @@ export function BackgroundCheckForm() {
   const [employmentEntries, setEmploymentEntries] = useState([
     {
       orgName: "",
-      startDate: undefined as Date | undefined,
-      endDate: undefined as Date | undefined,
+      startDate: "",
+      endDate: "",
       responsibilities: "",
       status: "",
       remarks: "",
@@ -98,16 +97,20 @@ export function BackgroundCheckForm() {
             </div>
             <div>
               <Label htmlFor="requestDate">Request Date</Label>
-              <DatePicker
-                date={personalInfo.requestDate}
-                setDate={(date) => setPersonalInfo({ ...personalInfo, requestDate: date })}
+              <Input
+                id="requestDate"
+                type="date"
+                value={personalInfo.requestDate}
+                onChange={(e) => setPersonalInfo({ ...personalInfo, requestDate: e.target.value })}
               />
             </div>
             <div>
               <Label htmlFor="returnDate">Return Date</Label>
-              <DatePicker
-                date={personalInfo.returnDate}
-                setDate={(date) => setPersonalInfo({ ...personalInfo, returnDate: date })}
+              <Input
+                id="returnDate"
+                type="date"
+                value={personalInfo.returnDate}
+                onChange={(e) => setPersonalInfo({ ...personalInfo, returnDate: e.target.value })}
               />
             </div>
             <div>
@@ -136,7 +139,12 @@ export function BackgroundCheckForm() {
             </div>
             <div>
               <Label htmlFor="dob">Date of Birth</Label>
-              <DatePicker date={personalInfo.dob} setDate={(date) => setPersonalInfo({ ...personalInfo, dob: date })} />
+              <Input
+                id="dob"
+                type="date"
+                value={personalInfo.dob}
+                onChange={(e) => setPersonalInfo({ ...personalInfo, dob: e.target.value })}
+              />
             </div>
             <div>
               <Label htmlFor="idType">Identification Type</Label>
@@ -260,15 +268,17 @@ export function BackgroundCheckForm() {
                       />
                     </TableCell>
                     <TableCell>
-                      <DatePicker
-                        date={entry.startDate}
-                        setDate={(date) => updateEntry(setEducationEntries, index, "startDate", date)}
+                      <Input
+                        type="date"
+                        value={entry.startDate}
+                        onChange={(e) => updateEntry(setEducationEntries, index, "startDate", e.target.value)}
                       />
                     </TableCell>
                     <TableCell>
-                      <DatePicker
-                        date={entry.endDate}
-                        setDate={(date) => updateEntry(setEducationEntries, index, "endDate", date)}
+                      <Input
+                        type="date"
+                        value={entry.endDate}
+                        onChange={(e) => updateEntry(setEducationEntries, index, "endDate", e.target.value)}
                       />
                     </TableCell>
                     <TableCell>
@@ -410,15 +420,17 @@ export function BackgroundCheckForm() {
                       />
                     </TableCell>
                     <TableCell>
-                      <DatePicker
-                        date={entry.startDate}
-                        setDate={(date) => updateEntry(setEmploymentEntries, index, "startDate", date)}
+                      <Input
+                        type="date"
+                        value={entry.startDate}
+                        onChange={(e) => updateEntry(setEmploymentEntries, index, "startDate", e.target.value)}
                       />
                     </TableCell>
                     <TableCell>
-                      <DatePicker
-                        date={entry.endDate}
-                        setDate={(date) => updateEntry(setEmploymentEntries, index, "endDate", date)}
+                      <Input
+                        type="date"
+                        value={entry.endDate}
+                        onChange={(e) => updateEntry(setEmploymentEntries, index, "endDate", e.target.value)}
                       />
                     </TableCell>
                     <TableCell>
@@ -457,6 +469,8 @@ export function BackgroundCheckForm() {
           </div>
         </CardContent>
       </Card>
+
+     
 
       {/* Additional Checks */}
       <Card>
